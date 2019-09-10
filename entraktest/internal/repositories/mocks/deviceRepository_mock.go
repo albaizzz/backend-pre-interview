@@ -12,10 +12,6 @@ type DeviceRepositoryMock struct {
 	recorder *DeviceRepositoryMockRecorder
 }
 
-// Store(deviceRequest models.Device) error
-// 	GetById(id uint64) (models.Device, error)
-// 	GetAll() ([]models.Device, error)
-
 type DeviceRepositoryMockRecorder struct {
 	mock *DeviceRepositoryMock
 }
@@ -52,8 +48,12 @@ func (mr *DeviceRepositoryMockRecorder) GetById(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*DeviceRepositoryMock)(nil).GetById), arg0)
 }
 
-func (m *DeviceRepositoryMock) Store() {
-
+func (m *DeviceRepositoryMock) Store(device models.Device) (err error) {
+	ret := m.ctrl.Call(m, "Store", device)
+	ret0, _ := ret[0].(error)
+	return ret0
 }
 
-func (mr *DeviceRepositoryMockRecorder) Store(arg0 interface{}) *gomock.Call
+func (mr *DeviceRepositoryMockRecorder) Store(arg0 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Store", reflect.TypeOf((*DeviceRepositoryMock)(nil).Store), arg0)
+}
